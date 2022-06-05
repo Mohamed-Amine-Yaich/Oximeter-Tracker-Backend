@@ -25,6 +25,7 @@ router.use(securityController.protected);
 router.use("/receiver/:id", messageRoute);
 
 //1)update me
+router.patch("/updateDoctor", userController.updateDoctor);
 
 router.patch("/updateMe", userController.updateMe);
 //2update his password (securitey)

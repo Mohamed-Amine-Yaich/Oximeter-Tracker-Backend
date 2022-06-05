@@ -107,3 +107,35 @@ exports.updateMe = async (req, res, next) => {
 
   sendResponse(res, updatedUser, "your data has been updated successfully");
 };
+
+exports.updateDoctor = async (req, res, next) => {
+  console.log(" update doctor");
+  //1/you cant change your password here
+  //2/email name last name , device ,(doctor for patient )
+  //3/send updated data
+  if (req.body.password || req.body.passwordConfirm) {
+    next(createError("you cant change your pass here", 400));
+  }
+  // const asArray = Object.entries(obj);
+  //update doctor is not allowed
+  //set a specific route when we get all doctor you can selecet a doctor that you want to deal with
+  //or not possible feature
+  const allowedField = ["doctor"];
+  const filtredBody = {};
+  //props of object
+  Object.keys(req.body).forEach(el => {
+    console.log("res.body keys : " + el);
+    if (allowedField.includes(el)) {
+      //  console.log("allowed el"+el);
+      //create in the new object a prop with the same name and the same val
+      filtredBody[el] = req.body[el];
+      //  console.log(filtredBody);
+    }
+  });
+
+  const updatedUser = await User.findByIdAndUpdate(req.user._id, filtredBody, {
+    new: true,
+  });
+
+  sendResponse(res, updatedUser, "your data has been updated successfully");
+};
