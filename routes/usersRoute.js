@@ -66,10 +66,21 @@ router.get("/getMe", userController.getMe);
 router
   .route("/")
   .get(
-    securityController.restrictTo(["doctor", "patient"]),
     userController.getAll
-  );
+  )
 
+  router
+  .route("/doctors")
+  .get(
+    userController.getAllDoctors
+  )
+  router
+  .route("/patients")
+  .get(
+    userController.getAllPatients
+  )
+
+  
 router
   .route("/:id")
   .get(
@@ -80,8 +91,8 @@ router
 router.use(securityController.restrictTo(["admin"]));
 
 router
-  .route("/")
-  .get(userController.getAllUser)
+  .route("/admin/")
+  .get(userController.getAll)
   .post(userController.createUser); //usless cause user must singup remove
 
 //test the protect like a handler

@@ -9,6 +9,8 @@ var usersRouter = require("./routes/usersRoute");
 var adminRoute = require("./routes/adminRoute");
 var doctorRoute = require("./routes/doctorRoute");
 var messageRoute = require("./routes/messageRoute");
+var dataRoute = require("./routes/dataRoute");
+
 var app = express();
 
 // view engine setup
@@ -25,9 +27,10 @@ app.use(express.static(path.join(__dirname, "public")));
 //using route as middelware
 //app.use("/", indexRouter);
 app.use("/users", usersRouter);
-//app.use("/admin", adminRoute);
-//app.use("/doctor", doctorRoute);
+/* app.use("/admin", adminRoute);
+ */ //app.use("/doctor", doctorRoute);
 app.use("/message", messageRoute);
+app.use("/data", dataRoute);
 
 // catch 404 and forward to error handler
 app.use("*", function (req, res, next) {

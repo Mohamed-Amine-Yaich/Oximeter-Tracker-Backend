@@ -57,6 +57,23 @@ exports.getAll = async (req, res, next) => {
   } else if (req.user.role === "patient") {
     const doc = await User.find({ role: "doctor" });
     sendResponse(res, doc);
+  } /* else if (req.user.role === "admin") {
+    const doc = await User.find({
+      $or: [{ role: "doctor" }, { role: "patient" }],
+    });
+    sendResponse(res, doc);
+  } */
+};
+exports.getAllDoctors = async (req, res, next) => {
+  if (req.user.role === "admin") {
+    const doc = await User.find({ role: "doctor" });
+    sendResponse(res, doc);
+  }
+};
+exports.getAllPatients = async (req, res, next) => {
+  if (req.user.role === "admin") {
+    const doc = await User.find({ role: "patient" });
+    sendResponse(res, doc);
   }
 };
 
