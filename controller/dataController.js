@@ -21,6 +21,19 @@ exports.getDataForUser = async (req, res, next) => {
     data: userData,
   });
 };
+
+exports.getDataForDoctor=
+async (req, res, next) => {
+  console.log("getting data");
+  const userData = await Data.find({ idpatient: req.params.id });
+  res.status(200).json({
+    status: "sucess ",
+    length: userData.length,
+    data: userData,
+  });
+};
+
+
 exports.deleteAll = async (req, res) => {
   const response = await Data.deleteMany();
 
@@ -28,3 +41,4 @@ exports.deleteAll = async (req, res) => {
     status: "sucess ",
   });
 };
+

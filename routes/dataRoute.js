@@ -7,6 +7,10 @@ const router = express.Router();
 router.use(securityController.protected);
 
 router
+  .route("/:id")
+  .get(dataController.getDataForDoctor)
+
+router
   .route("/")
   .get(dataController.getDataForUser)
   .post(securityController.restrictTo(["patient"]), dataController.postData)
